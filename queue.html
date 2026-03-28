@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>เช็คคิว</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#ffd6e7,#fff1b8);
+}
+
+/* 💖 HEADER */
+.top-box{
+  margin:15px;
+  padding:18px;
+  border-radius:25px;
+  text-align:center;
+  font-weight:800;
+  font-size:20px;
+  color:white;
+
+  background:linear-gradient(135deg,#ff8fb1,#ffc94d,#7fd6ff);
+  background-size:200% 200%;
+  animation:move 4s infinite alternate;
+}
+
+@keyframes move{
+  0%{background-position:0%}
+  100%{background-position:100%}
+}
+
+/* 🔍 */
+.search{
+  margin:10px 15px;
+}
+.search input{
+  width:100%;
+  padding:12px;
+  border-radius:999px;
+  border:none;
+}
+
+/* 📋 count */
+.count{
+  margin:10px 15px;
+  padding:10px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.7);
+  font-weight:bold;
+  color:#ff8fb1;
+}
+
+/* 📦 */
+.box{margin:15px}
+
+/* 🎀 card */
+.card{
+  background:linear-gradient(145deg,#fff6f0,#fff1cc);
+  border-radius:20px;
+  padding:15px;
+  margin-bottom:12px;
+  position:relative;
+}
+
+/* 🔢 */
+.num{
+  position:absolute;
+  right:12px;
+  top:12px;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff8fb1,#ffc94d);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+/* 🧾 */
+.name{font-weight:700;}
+.detail{font-size:12px;color:#777;}
+.date{font-size:11px;color:#999;margin-top:4px;}
+
+/* ===== STATUS ===== */
+.status{
+  margin-top:10px;
+  padding:10px 14px;
+  border-radius:999px;
+
+  text-align:center;
+  font-weight:700;
+  font-size:12px;
+
+  display:inline-block;
+
+  box-shadow:
+    0 6px 15px rgba(0,0,0,0.1),
+    inset 0 2px 6px rgba(255,255,255,0.6);
+
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop{
+  from{ transform:scale(0.8); opacity:0; }
+  to{ transform:scale(1); opacity:1; }
+}
+
+/* 🎨 งาน */
+.brief{background:#ffe4b5;}
+.doing{background:#cceaff;}
+.done{background:#d4f8d4;}
+
+/* 💰 เงิน */
+.deposit{background:#fff0cc;}
+.pending{background:#ffd6d6;}
+.unknown{background:#eee;}
+.paid{background:#d4f8d4;}
+
+/* 👑 panel */
+.panel{
+  margin-top:8px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+/* 🎀 admin buttons */
+.panel button{
+  flex:1;
+  border:none;
+  border-radius:999px;
+  padding:7px 10px;
+
+  font-size:12px;
+  font-weight:600;
+
+  color:#666;
+
+  background:linear-gradient(135deg,#ff9acb,#8fd3ff);
+  color:white;
+
+  box-shadow:
+    0 6px 15px rgba(255,105,180,0.3);
+}
+
+  transition:0.2s;
+}
+
+.panel button:hover{
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* กด */
+.panel button:active{
+  transform:scale(0.92);
+  background:linear-gradient(135deg,#ff9acb,#8fd3ff);
+  color:white;
+
+  box-shadow:
+    0 6px 15px rgba(255,105,180,0.3);
+}
+
+/* 🎨 งาน */
+.brief{
+  background:linear-gradient(135deg,#ffe29f,#ffb347);
+  color:#8a5a00;
+}
+
+.doing{
+  background:linear-gradient(135deg,#6ecbff,#4facfe);
+  color:white;
+}
+
+.done{
+  background:linear-gradient(135deg,#6ee7a2,#34d399);
+  color:white;
+}
+
+/* 💰 เงิน */
+.deposit{
+  background:linear-gradient(135deg,#fff0cc,#ffd86b);
+  color:#8a5a00;
+}
+
+.pending{
+  background:linear-gradient(135deg,#ffb3b3,#ff6a6a);
+  color:white;
+}
+
+.paid{
+  background:linear-gradient(135deg,#84fab0,#8fd3f4);
+  color:white;
+}
+
+.unknown{
+  background:#eee;
+  color:#666;
+}
+.status:hover{
+  transform:scale(1.05);
+}
+
+/* 💖 floating home */
+.floating-home{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+
+  padding:14px 28px;
+  border-radius:999px;
+
+  background:linear-gradient(135deg,#ff8fb1,#ffc94d,#7fd6ff);
+  color:white;
+
+  font-weight:bold;
+  text-decoration:none;
+
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+
+  z-index:999;
+  transition:0.2s;
+}
+
+.floating-home:hover{
+  transform:translateX(-50%) scale(1.05);
+}
+.floating-home:active{
+  transform:translateX(-50%) scale(0.95);
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💖 หัวข้อ (กดเพื่อแอดมิน) -->
+<div class="top-box" onclick="loginAdmin()">
+  📋 เช็คคิว
+</div>
+
+<!-- 🔍 -->
+<div class="search">
+  <input id="search" placeholder="🔍 ค้นหา (ชื่อ / เลขคิว / ด้อม)">
+
+<!-- 📋 -->
+<div class="count" id="countBox">📋 คิวทั้งหมด (0)</div>
+
+<div class="box" id="list"></div>
+
+<!-- 🏠 ปุ่มลอย -->
+<a href="index.html" class="floating-home">
+  🏠 กลับหน้าหลัก
+</a>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getFirestore, collection, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey:"AIza...",
+  authDomain:"commissionkys-ff998.firebaseapp.com",
+  projectId:"commissionkys-ff998"
+});
+
+const db = getFirestore(app);
+
+let tasks=[];
+let isAdmin=false;
+
+/* 👑 login */
+window.loginAdmin=()=>{
+  const pass=prompt("รหัสแอดมิน:");
+  if(pass==="122510"){
+    isAdmin=true;
+    alert("เข้าโหมดแอดมินแล้ว");
+    render();
+  }
+};
+
+/* โหลด */
+async function load(){
+  const snap=await getDocs(collection(db,"tasks"));
+  tasks=[];
+
+  snap.forEach(d=>{
+    tasks.push({id:d.id,...d.data()});
+  });
+
+  // 🔥 ใหม่บน เก่าล่าง
+  tasks.sort((a,b)=> new Date(b.created)-new Date(a.created));
+
+  render();
+}
+
+/* 🎨 งาน */
+function workStatus(s){
+  if(s==="done") return `<div class="status done">🟢 เสร็จสิ้น</div>`;
+  if(s==="doing") return `<div class="status doing">🔵 ดำเนินการ</div>`;
+  return `<div class="status brief">🟡 รอคิวบรีฟ</div>`;
+}
+
+/* 💰 เงิน */
+function payStatus(p){
+  if(p==="paid") return `<div class="status paid">✅ จ่ายเรียบร้อย</div>`;
+  if(p==="deposit") return `<div class="status deposit">💰 มัดจำ</div>`;
+  if(p==="pending") return `<div class="status pending">⌛ ค้างชำระ</div>`;
+  return `<div class="status unknown">❓ ยังไม่คำนวณ</div>`;
+}
+
+/* render */
+function render(){
+  const box=document.getElementById("list");
+  const key=document.getElementById("search").value.toLowerCase();
+
+  box.innerHTML="";
+
+  document.getElementById("countBox").innerText =
+    "📋 คิวทั้งหมด ("+tasks.length+")";
+
+  tasks
+  .filter((t,i)=>{
+  const queueNumber = (tasks.length - i).toString();
+
+  return (
+    (t.customer || "").toLowerCase().includes(key) ||
+    (t.fandom || "").toLowerCase().includes(key) ||
+    (t.type || "").toLowerCase().includes(key) ||
+    (t.date || "").toLowerCase().includes(key) ||
+    queueNumber.includes(key)
+  );
+})
+  .forEach((t,i)=>{
+
+    const adminUI = isAdmin ? `
+      <div class="panel">
+  <button class="btn-brief ${t.status==='brief'?'active':''}" onclick="setWork('${t.id}','brief')">🟡 รอ</button>
+
+<button class="btn-doing ${t.status==='doing'?'active':''}" onclick="setWork('${t.id}','doing')">🔵 ทำ</button>
+
+<button class="btn-done ${t.status==='done'?'active':''}" onclick="setWork('${t.id}','done')">🟢 เสร็จ</button>
+
+
+<button class="btn-deposit ${t.payment==='deposit'?'active':''}" onclick="setPay('${t.id}','deposit')">💰 มัดจำ</button>
+
+<button class="btn-pending ${t.payment==='pending'?'active':''}" onclick="setPay('${t.id}','pending')">⌛ ค้าง</button>
+
+<button class="btn-paid ${t.payment==='paid'?'active':''}" onclick="setPay('${t.id}','paid')">✅ จ่าย</button>
+</div>
+    `:"";
+
+    box.innerHTML+=`
+      <div class="card">
+        <div class="num">${tasks.length - i}</div>
+
+        <div class="name">${t.customer}</div>
+        <div class="detail">${t.fandom} • ${t.type} (${t.amount})</div>
+
+        <div class="date">📅 ${t.date || "-"}</div>
+
+        ${workStatus(t.status)}
+        ${payStatus(t.payment)}
+
+        ${adminUI}
+      </div>
+    `;
+  });
+}
+
+/* update */
+window.setWork=async(id,status)=>{
+  await updateDoc(doc(db,"tasks",id),{status});
+  load();
+}
+
+window.setPay=async(id,payment)=>{
+  await updateDoc(doc(db,"tasks",id),{payment});
+  load();
+}
+
+document.getElementById("search").addEventListener("input",render);
+
+load();
+</script>
+
+</body>
+</html>

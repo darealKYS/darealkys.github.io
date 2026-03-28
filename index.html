@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>DarealKYS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+
+  /* 🌈 พื้นหลัง gradient แบบในรูป */
+  background: linear-gradient(135deg, #ffd6f0, #cde7ff);
+}
+
+/* 🎨 เอฟเฟกต์พื้นหลังลอยๆ */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 10%);
+  background-size: 40px 40px;
+  animation: moveBg 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveBg {
+  from { transform: translate(0,0); }
+  to { transform: translate(-200px,-200px); }
+}
+
+/* 💎 card glass */
+.glass {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* 🔥 header */
+.header {
+  padding: 20px;
+}
+
+.header-box {
+  padding: 20px;
+  text-align: center;
+}
+
+.brand {
+  font-size: 34px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ff6ec7, #6ecbff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub {
+  font-size: 14px;
+  color: #777;
+}
+
+/* 🎀 menu */
+.menu{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin:25px 0;
+}
+
+/* 🔥 ปุ่มใหม่ */
+.menu a{
+  width:85px;
+  height:85px;
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+  text-decoration:none;
+
+  font-size:12px;
+  font-weight:700;
+
+  color:#555;
+
+  /* 🌈 ไล่สีพาสเทล */
+  background:linear-gradient(145deg,#ffffff,#ffe6f3,#e0f0ff);
+
+  /* 💎 มิติ */
+  box-shadow:
+  0 10px 25px rgba(255,105,180,0.4);
+  transition:0.25s;
+}
+}
+.menu a:active{
+  transform:scale(0.9);
+}
+.menu a:hover{
+  transform:translateY(-5px);
+}
+
+/* 📢 OPEN COMMISSION (อัปเกรด) */
+.announce {
+  margin: 15px;
+  padding: 14px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #ff9acb, #8fd3ff);
+  color: white;
+
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+
+  box-shadow: 
+    0 8px 20px rgba(0,0,0,0.15),
+    inset 0 2px 5px rgba(255,255,255,0.4);
+    overflow: hidden; /* 🔥 ตัวแก้หลัก */
+
+  position: relative;
+  z-index: 5;
+}
+.announce::after {
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:50%;
+  height:100%;
+
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    rgba(255,255,255,0.4),
+    rgba(255,255,255,0.25),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+  filter: blur(6px);
+  opacity:0.8;
+
+  animation: shineAnnounce 3.5s ease-in-out infinite;
+}
+
+@keyframes shineAnnounce {
+  0% { left:-100%; }
+  100% { left:130%; }
+}
+
+/* 💖 section */
+.section {
+  margin: 15px;
+  padding: 15px;
+}
+
+.title {
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* ⭐ recommend */
+.recommend {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.recommend div {
+  min-width: 140px;
+  padding: 12px;
+
+  border-radius: 15px;
+
+  background: linear-gradient(135deg, #fff, #e6f4ff);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ask-wrap{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:10px;
+  border-radius:999px;
+
+  background:rgba(255,255,255,0.9);
+
+  box-shadow:
+    inset 0 2px 6px rgba(255,255,255,0.8),
+    0 8px 20px rgba(255,105,180,0.15);
+}
+.fandom-list span{
+  padding:6px 12px;
+  border-radius:999px;
+
+  background:linear-gradient(135deg,#ffd6ec,#e6f4ff);
+
+  font-size:11px;
+  font-weight:600;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+
+  transition:0.2s;
+}
+
+.fandom-list span:hover{
+  transform:scale(1.08);
+  box-shadow:0 6px 15px rgba(255,105,180,0.25);
+}
+
+/* input */
+.ask-wrap input{
+  flex:1;
+  border:none;
+  outline:none;
+
+  padding:12px;
+  border-radius:999px;
+
+  background:transparent;
+  font-size:13px;
+}
+
+/* ปุ่ม */
+.ask-wrap button{
+  width:42px;
+  height:42px;
+
+  border:none;
+  border-radius:50%;
+
+  background:linear-gradient(135deg,#ff8fd8,#8fd3ff);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:0 6px 15px rgba(255,105,180,0.3);
+
+  transition:0.2s;
+}
+
+/* hover / กด */
+.ask-wrap button:active{
+  transform:scale(0.9);
+}
+
+.question{
+  margin:10px 15px;
+  padding:10px 14px;
+
+  border-radius:15px;
+
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(8px);
+
+  box-shadow:0 6px 15px rgba(255,105,180,0.1);
+
+  font-size:13px;
+}
+
+.bottom-nav div {
+  text-align: center;
+  font-size: 12px;
+}
+
+.header-box{
+  padding:22px;
+  text-align:center;
+  border-radius:30px;
+
+  background:linear-gradient(145deg,#ffffffcc,#ffe6f3cc);
+
+  backdrop-filter: blur(12px);
+
+  border:1px solid rgba(255,255,255,0.8);
+
+  box-shadow:
+    0 15px 35px rgba(255,105,180,0.25), /* เงาหลัก */
+    0 5px 15px rgba(0,0,0,0.08),        /* เงาลึก */
+    inset 0 2px 6px rgba(255,255,255,0.8); /* แสงบน */
+
+  position:relative;
+  overflow:hidden;
+}
+.header-box::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+
+  background:radial-gradient(
+    circle,
+    rgba(255,255,255,0.4) 0%,
+    transparent 60%
+  );
+
+  opacity:0.5;
+  animation: glowMove 8s linear infinite;
+}
+
+@keyframes glowMove{
+  0%{transform:translate(-10%,-10%)}
+  50%{transform:translate(10%,10%)}
+  100%{transform:translate(-10%,-10%)}
+}
+.brand{
+  font-size:36px;
+  font-weight:800;
+
+  background:linear-gradient(90deg,#ff5fa2,#ff9ecb,#6ecbff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:
+    0 2px 8px rgba(255,105,180,0.25); /* 🔥 เพิ่ม glow */
+}
+
+/* 📢 list */
+.announce-list {
+  padding-left: 18px;
+  font-size: 13px;
+  color: #444;
+}
+
+.announce-list li {
+  margin-bottom: 6px;
+}
+.queue-box{
+  margin:15px;
+  padding:10px;
+  border-radius:28px;
+  text-align:center;
+
+  background:transparent; /* 🔥 ลบชมพูออก */
+
+  box-shadow:none; /* 🔥 เอาเงาฟุ้งออก */
+
+  position:relative;
+}
+.queue-inner{
+  padding:25px;
+  border-radius:28px;
+
+  background:linear-gradient(145deg,#ffe4f2,#ffd1ea);
+
+  box-shadow:
+    0 12px 30px rgba(255,105,180,0.25),
+    inset 0 2px 6px rgba(255,255,255,0.7);
+
+  border:1px solid rgba(255,255,255,0.8);
+
+  position:relative;
+}
+
+/* ✨ วิ้งเนียน */
+.queue-box::before{
+  content:"";
+  position:absolute;
+  top:-30%;
+  left:-30%;
+  width:160%;
+  height:160%;
+
+  background:radial-gradient(
+    circle,
+    rgba(255,255,255,0.2) 0%,
+    rgba(255,255,255,0.08) 30%,
+    transparent 70%
+  );
+
+  filter: blur(18px); /* 🔥 ลดจาก 40 → 18 */
+  opacity:0.5;
+
+  animation: shineQueue 10s ease-in-out infinite;
+}
+
+@keyframes shineQueue{
+  0%{
+    transform: translate(-10%,-10%);
+  }
+  50%{
+    transform: translate(10%,10%);
+  }
+  100%{
+    transform: translate(-10%,-10%);
+  }
+}
+.queue-title{
+  font-weight:800;
+  font-size:18px;
+  color:#ff5fa2;
+}
+
+.queue-date{
+  margin-top:6px;
+  font-size:14px;
+  color:#666;
+}
+
+.queue-status{
+  margin-top:10px;
+  display:inline-block;
+  padding:7px 16px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ff9ecb,#ff5fa2);
+  color:white;
+  font-size:12px;
+  font-weight:600;
+  box-shadow:0 4px 12px rgba(255,105,180,0.3);
+}
+
+.queue-{
+  padding:22px;
+  border-radius:25px;
+
+  background:linear-gradient(145deg,#ffd6ec,#ffc2e0,#ffe8f5);
+
+  box-shadow:
+    inset 0 1px 4px rgba(255,255,255,0.7),
+    inset 0 -4px 10px rgba(255,105,180,0.15);
+
+  border:1px solid rgba(255,255,255,0.6);
+}
+
+.queue-::before{
+  content:"";
+  position:absolute;
+  top:-30%;
+  left:-30%;
+  width:160%;
+  height:160%;
+
+  background:radial-gradient(circle,
+    rgba(255,255,255,0.35) 0%,
+    transparent 60%
+  );
+
+  opacity:0.4;
+}
+.open-banner{
+  position:relative;
+  overflow:hidden;
+  border-radius:999px;
+}
+
+/* ✨ วิ้งใหม่ */
+.open-banner::before{
+  animation: shineOpen 4s ease-in-out infinite;
+}
+
+@keyframes shineOpen{
+  0%{ left:-100%; }
+  100%{ left:130%; }
+}
+.recommend div{
+  min-width:140px;
+  padding:14px;
+
+  border-radius:18px;
+
+  background:linear-gradient(135deg,#ffffff,#e6f4ff);
+
+  font-size:13px;
+  font-weight:700;
+  color:#444;
+
+  box-shadow:
+    0 6px 15px rgba(0,0,0,0.08),
+    inset 0 2px 6px rgba(255,255,255,0.7);
+
+  transition:0.25s;
+}
+.recommend div:hover{
+  transform:translateY(-5px) scale(1.05);
+
+  background:linear-gradient(135deg,#ffd6ec,#e0f0ff);
+
+  box-shadow:
+    0 12px 25px rgba(255,105,180,0.25);
+}
+.title{
+  font-weight:800;
+  font-size:16px;
+
+  background:linear-gradient(90deg,#ff5fa2,#8fd3ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.fandom-box{
+  margin:15px;
+  padding:18px;
+  border-radius:25px;
+
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
+
+  box-shadow:0 10px 25px rgba(255,105,180,0.15);
+}
+
+.fandom-title{
+  text-align:center;
+  font-weight:800;
+  margin-bottom:10px;
+
+  background:linear-gradient(90deg,#ff5fa2,#8fd3ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* 🔥 grid แทน bullet */
+.fandom-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+}
+
+.fandom-list span{
+  padding:6px 12px;
+  border-radius:999px;
+
+  background:linear-gradient(135deg,#ffd6ec,#e6f4ff);
+
+  font-size:11px;
+  font-weight:600;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.fandom-note{
+  margin-top:10px;
+  text-align:center;
+  font-size:12px;
+  color:#777;
+}
+.holiday-box{
+  margin-top:10px;
+  padding:12px;
+
+  border-radius:20px;
+  text-align:center;
+
+  background:linear-gradient(135deg,#ffe0ec,#fff0f5);
+  color:#ff5fa2;
+
+  font-weight:700;
+  font-size:13px;
+
+  box-shadow:
+    0 6px 15px rgba(255,105,180,0.15),
+    inset 0 2px 6px rgba(255,255,255,0.7);
+
+  position:relative;
+}
+
+/* วันที่ */
+.holiday-box span{
+  display:block;
+  font-size:12px;
+  font-weight:500;
+  color:#666;
+  margin-top:3px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 💎 header -->
+<div class="header">
+  <div class="header-box glass">
+    <div class="brand">DarealKYS</div>
+    <div class="sub">- By Claire -</div>
+  </div>
+</div>
+
+<!-- 🎀 menu -->
+<div class="menu">
+  <a href="booking.html">
+    <span class="icon">📅</span>
+    <span class="text">จองคิว</span>
+  </a>
+
+  <a href="queue.html">
+    <span class="icon">💌</span>
+    <span class="text">คิว</span>
+  </a>
+
+  <a href="album.html">
+    <span class="icon">🎨</span>
+    <span class="text">ผลงาน</span>
+  </a>
+</div>
+
+<!-- 📢 -->
+<div class="announce">💖 OPEN COMMISSION 💖</div>
+
+<!-- ⭐ -->
+<div class="section glass">
+  <div class="title">✨ Recommended</div>
+  
+  <div class="fandom-box">
+  <div class="fandom-title">💖 รับงานด้อม 💖</div>
+
+  <div class="fandom-list">
+    <span>ɴᴀʀᴜᴛᴏ</span>
+    <span>ʙᴏʀᴜᴛᴏ</span>
+    <span>ʙʟᴜᴇʟᴏᴄᴋ</span>
+    <span>ʙʟᴇᴀᴄʜ</span>
+    <span>ᴊᴜᴊᴜᴛꜱᴜ ᴋᴀɪꜱᴇɴ</span>
+    <span>ᴋɪᴍɪᴛꜱᴜ ɴᴏ ʏᴀɪʙᴀ</span>
+    <span>ᴅʀ. ꜱᴛᴏɴᴇ</span>
+    <span>ᴍʏ ʜᴇʀᴏ ᴀᴄᴀᴅᴇᴍɪᴀ</span>
+    <span>ᴏɴᴇ ᴘɪᴇᴄᴇ</span>
+  </div>
+
+  <div class="fandom-note">✨ ด้อมอื่นสอบถามเพิ่มเติมได้ค่ะ</div>
+</div>
+
+<!-- 💬 -->
+<div class="section glass">
+  <div class="section-title">📢 ประกาศเพิ่มเติม</div>
+  
+  <div class="queue-box">
+    <div class="queue-">
+
+      <div class="queue-title">💌 คิวว่าง 💌</div>
+      <div class="queue-date">📅  1 – 5 เมษายน</div>
+      <div class="queue-status">🟢รับงานอยู่</div>
+
+      <div class="holiday-box">
+        🌸 หยุดเทศกาลสงกรานต์ 🌸<br>
+        <span>13 – 16 เมษายน</span>
+      </div>
+
+    </div>
+  </div>
+
+  <ul class="announce-list">
+    <li>⏳ ใช้เวลา 3–7 วัน</li>
+    <li>💰 มัดจำก่อนเริ่มงาน</li>
+    <li>🚫 ไม่รับงานเร่ง</li>
+    <li>📩 ติดต่อผ่าน DM Facebook และ Instagram เท่านั้น</li>
+    <li>⭐️ ช่องทางการส่งงาน :  ส่งงานผ่านไดรฟ์หรืออีเมล
+    </li>
+    <li>❗อาจจะไม่เหมือนอนิเมะ100%นะคะ เนื่องจากเป็นงานเนียนเมะ</li>
+     <li>💐 ทางเราขอนำไปเป็นตัวอย่างคมช. อาจจะไม่ทุกภาพนะคะ</li>
+     <li>‎💚 อนิเมะสไตล์และแฟนอาร์ตเท่านั้น</li>
+  </ul>
+</div>
+
+</script>
+
+</body>
+</html>

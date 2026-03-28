@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>อัลบั้ม.คมช</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#ffd6e7,#ffe4f0,#fff1c9);
+}
+
+/* 🎀 HEADER */
+.title-box{
+  margin:20px;
+  padding:20px;
+  border-radius:30px;
+  text-align:center;
+  font-size:24px;
+  font-weight:800;
+  color:white;
+  background:linear-gradient(135deg,#ff9ecb,#ffc7a5);
+}
+
+/* 🏠 */
+.back{
+  text-align:center;
+}
+.back a{
+  padding:10px 25px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ff8fb1,#ff5fa2);
+  color:white;
+  text-decoration:none;
+}
+
+/* 💖 PRICE */
+.price-box{
+  background:white;
+  margin:15px;
+  padding:20px;
+  border-radius:25px;
+}
+
+.price-title{
+  text-align:center;
+  font-weight:800;
+  color:#ff5fa2;
+}
+
+.price-sub{
+  text-align:center;
+  font-size:12px;
+  color:#888;
+}
+
+.price-section{
+  margin-top:10px;
+  font-weight:700;
+  color:#ff8fb1;
+}
+
+.price-item{
+  display:flex;
+  justify-content:space-between;
+  padding:6px 0;
+  border-bottom:1px dashed #ffd6ea;
+}
+
+.price-item span{
+  color:#ff5fa2;
+  font-weight:800;
+}
+
+/* 🎯 FILTER */
+.filter{
+  padding:15px;
+  display:flex;
+  flex-wrap:wrap; /* 🔥 ให้ขึ้นบรรทัดใหม่อัตโนมัติ */
+  gap:10px;
+  justify-content:center; /* จัดกลาง */
+}
+
+.filter button{
+  border:none;
+  padding:10px 18px;
+  border-radius:999px; /* 💖 pill กลมๆ */
+  letter-spacing:0.5px;
+
+  font-size:13px;
+  font-weight:600;
+
+  color:#333;
+
+  background:linear-gradient(135deg,#ffd6e7,#e6d6ff); /* pastel นุ่มๆ */
+  
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+
+  transition:0.25s;
+}
+
+/* hover */
+.filter button:hover{
+  transform:translateY(-2px);
+}
+
+/* active */
+.filter button.active{
+  background:linear-gradient(135deg,#ff9ecb,#caa6ff);
+  color:white;
+  box-shadow:0 6px 15px rgba(255,105,180,0.25);
+}
+
+/* 📸 GRID */
+.grid{
+  padding:15px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  min-height:60vh;
+
+  justify-content:center;
+  align-content:center; /* 🔥 ตัวนี้แหละสำคัญ */
+}
+
+.card{
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  height:200px;
+  width:100%;
+  box-shadow:0 6px 15px rgba(0,0,0,0.08);
+
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 12px 25px rgba(255,105,180,0.3);
+}
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.overlay{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:8px;
+  background:rgba(255,255,255,0.7);
+  font-size:12px;
+}
+
+.n{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:white;
+  padding:5px 10px;
+  border-radius:20px;
+  cursor:pointer;
+}
+.loader{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:60vh;
+  font-size:18px;
+  color:#ff5fa2;
+  grid-column:1 / -1; /* 🔥 สำคัญ */
+  text-align:center;
+  font-weight:600;
+  animation:float 1.5s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+  100%{transform:translateY(0);}
+}
+
+/* ➕ */
+.upload-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#ff5fa2;
+  color:white;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.popup{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999; /* 🔥 เพิ่ม */
+}
+
+.box{
+  width:90%;
+  max-width:350px;
+  background:white;
+  padding:15px;
+  border-radius:20px;
+
+  position:relative;
+  z-index:2; /* 🔥 เพิ่มตัวนี้ */
+}
+
+.box input{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border-radius:14px;
+  border:none;
+  background:#fff5f9;
+  box-sizing:border-box; /* 🔥 กันล้น */
+}
+
+.file-btn{
+  display:block;
+  margin-top:8px;
+  padding:12px;
+  border-radius:14px;
+  text-align:center;
+  color:white;
+  background:linear-gradient(135deg,#ff9ecb,#ff5fa2);
+}
+.file-btn input{display:none}
+
+.btn-row{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+.btn-row button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:999px;
+}
+
+.save{
+  background:#ff5fa2;
+  color:white;
+}
+.cancel{
+  background:#eee;
+}
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.4s;
+}
+
+.card:hover img{
+  transform:scale(1.1);
+}
+#viewer img{
+  animation:zoom 0.3s ease;
+}
+
+@keyframes zoom{
+  from{
+    transform:scale(0.8);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+select{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border-radius:14px;
+  border:none;
+  background:#fff5f9;
+  font-family:'Poppins',sans-serif;
+  box-sizing:border-box;
+  appearance:none; /* เอาลูกศรเดิมออก */
+}
+
+/* ลูกศร custom */
+select{
+  background-image:url("data:image/svg+xml;utf8,<svg fill='%23ff5fa2' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+}
+.empty{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:60vh;
+  grid-column:1 / -1; /* 🔥 ให้กินเต็มแถว */
+  text-align:center;
+}
+
+.empty .emoji{
+  font-size:50px;
+  animation:float 1.5s ease-in-out infinite;
+}
+
+.empty .text{
+  font-size:20px;
+  font-weight:700;
+  color:#ff5fa2;
+  margin-top:10px;
+}
+
+.empty .sub{
+  font-size:13px;
+  color:#888;
+  margin-top:5px;
+}
+.like-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:white;
+  padding:5px 10px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+  color:#ff5fa2;
+}
+.like-btn:active{
+  transform:scale(1.2);
+}
+.like-btn:hover{
+  transform:scale(1.1);
+  background:#ffe6f2;
+}
+.delete-btn{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:white;
+  padding:5px 10px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.delete-btn:hover{
+  background:#ffe6e6;
+  transform:scale(1.1);
+}
+.price-section:last-of-type{
+  margin-top:15px;
+  color:#ff5fa2;
+}
+
+.price-item span{
+  font-weight:800;
+}
+.edit-btn{
+  position:absolute;
+  top:10px;
+  left:50px;
+  background:white;
+  padding:5px 10px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.edit-btn:hover{
+  background:#e6f0ff;
+  transform:scale(1.1);
+}
+.cat-btn{
+  position:absolute;
+  top:10px;
+  left:90px; /* 🔥 ขยับถัดจาก edit */
+  background:white;
+  padding:5px 10px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.cat-btn:hover{
+  background:#fff5cc;
+  transform:scale(1.1);
+}
+.watermark{
+  position:absolute;
+  top:10px;
+  left:10px;
+
+  font-size:14px;
+  font-weight:700;
+
+  color:white;
+  opacity:0.7;
+
+  text-shadow:0 2px 5px rgba(0,0,0,0.5);
+
+  pointer-events:none;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="title-box" onclick="login()">🎀 อัลบั้ม.คมช 🎀</div>
+
+<div class="back">
+  <a href="index.html">🏠 กลับหน้าแรก</a>
+</div>
+
+<!-- 💖 ราคา -->
+<div class="price-box">
+  <div class="price-title">💖 Commission 💖</div>
+  <div class="price-sub">OC | OC x Canon | จิบิ</div>
+
+  <div class="price-section">🎨 สเกลงาน</div>
+  <div class="price-item">หัว-อก <span>150฿</span></div>
+  <div class="price-item">หัว-เอว <span>250฿</span></div>
+  <div class="price-item">Full Body <span>300฿</span></div>
+  <div class="price-item">Character Sheet <span>500฿</span></div>
+
+  <div class="price-section">✏️ อื่น ๆ</div>
+  <div class="price-item">เส้นรัฟ <span>175฿</span></div>
+  <div class="price-item">Fanart <span>400–500฿</span></div>
+  <div class="price-item">Chibi <span>250฿</span></div>
+  <div class="price-section">➕ เพิ่มตัวละคร</div>
+  <div class="price-item">งานทั่วไป <span>+100฿ / ตัว</span></div>
+<div class="price-item">เส้นรัฟ <span>+50฿ / ตัว</span></div>
+</div>
+
+<!-- 🎯 filter -->
+<div class="filter">
+  <button onclick="setFilter(this,'ทั้งหมด')" class="active">ทั้งหมด</button>
+  <button onclick="setFilter(this,'หัว-อก')">หัว-อก</button>
+  <button onclick="setFilter(this,'หัว-เอว')">หัว-เอว</button>
+  <button onclick="setFilter(this,'Full Body')">Full Body</button>
+  <button onclick="setFilter(this,'Character Sheet')">Character Sheet</button>
+  <button onclick="setFilter(this,'เส้นรัฟ')">เส้นรัฟ</button>
+  <button onclick="setFilter(this,'Fanart')">Fanart</button>
+  <button onclick="setFilter(this,'Chibi')">Chibi</button>
+</div>
+
+<div id="grid" class="grid"></div>
+
+<div class="upload-btn" id="uploadBtn" onclick="openPop()">＋</div>
+
+<!-- 🔥 popup upload -->
+<div id="popup" class="popup">
+  <div style="position:absolute;width:100%;height:100%;z-index:1;" onclick="closeCatPop()"></div>
+
+  <div class="box" onclick="event.stopPropagation()">
+
+    <input id="name" placeholder="ชื่องาน">
+    <input id="type" placeholder="รายละเอียด">
+
+    <select id="cat">
+      <option value="">เลือกหมวด</option>
+      <option value="หัว-อก">หัว-อก</option>
+      <option value="หัว-เอว">หัว-เอว</option>
+      <option value="Full Body">Full Body</option>
+      <option value="Character Sheet">Character Sheet</option>
+      <option value="เส้นรัฟ">เส้นรัฟ</option>
+      <option value="Fanart">Fanart</option>
+      <option value="Chibi">Chibi</option>
+    </select>
+
+    <label class="file-btn">
+      📷 เลือกรูป
+      <input id="file" type="file" accept="image/*">
+    </label>
+
+    <img id="preview" style="width:100%;margin-top:10px;border-radius:15px;display:none;">
+
+    <div class="btn-row">
+      <button class="save" onclick="upload()">อัปโหลด</button>
+      <button class="cancel" onclick="closePop()">ยกเลิก</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- 🔥 popup เปลี่ยนหมวด -->
+<div id="catPopup" class="popup">
+  <div style="position:absolute;width:100%;height:100%;" onclick="closeCatPop()"></div>
+
+  <div class="box" onclick="event.stopPropagation()">
+
+    <div style="font-weight:700; text-align:center; color:#ff5fa2;">
+      เลือกหมวด 💖
+    </div>
+
+    <select id="catSelect">
+      <option value="หัว-อก">หัว-อก</option>
+      <option value="หัว-เอว">หัว-เอว</option>
+      <option value="Full Body">Full Body</option>
+      <option value="Character Sheet">Character Sheet</option>
+      <option value="เส้นรัฟ">เส้นรัฟ</option>
+      <option value="Fanart">Fanart</option>
+      <option value="Chibi">Chibi</option>
+    </select>
+
+    <div class="btn-row">
+      <button class="save" onclick="saveCategory()">บันทึก</button>
+      <button class="cancel" onclick="closeCatPop()">ยกเลิก</button>
+    </div>
+
+  </div>
+</div>
+
+<div id="viewer" style="
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:999;
+" onclick="this.style.display='none'">
+
+  <div style="
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-size:30px;
+    color:white;
+    cursor:pointer;
+  " onclick="document.getElementById('viewer').style.display='none'">
+    ✖
+  </div>
+
+  <img id="viewerImg" style="
+  max-width:90%;
+  max-height:90%;
+  border-radius:20px;
+  ">
+</div>
+
+<script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+
+<script type="module">
+import { updateDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey:"AIza...",
+  authDomain:"commissionkys-ff998.firebaseapp.com",
+  projectId:"commissionkys-ff998",
+  storageBucket:"commissionkys-ff998.firebasestorage.app"
+});
+
+const db = getFirestore(app);
+
+let works=[];
+let currentFilter="ทั้งหมด";
+let isAdmin=false;
+let currentEditId = null;
+
+/* 🔐 login */
+window.login=()=>{
+  if(prompt("รหัส")==="122510"){
+    isAdmin=true;
+    document.getElementById("uploadBtn").style.display="flex";
+    alert("เข้าแอดมินแล้ว 💖");
+    render(); // 🔥 สำคัญ
+  }
+};
+
+/* filter */
+window.setFilter=(btn,cat)=>{
+  currentFilter=cat;
+  document.querySelectorAll(".filter button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  render();
+};
+
+/* popup */
+window.openPop = () => {
+  if(!isAdmin){
+    alert("สำหรับแอดมินเท่านั้น 🔒");
+    return;
+  }
+
+  document.getElementById("popup").style.display = "flex";
+};
+
+/* upload */
+window.upload = () => {
+
+  const nameInput = document.getElementById("name");
+  const typeInput = document.getElementById("type");
+  const catInput = document.getElementById("cat").value;
+
+  const widget = cloudinary.createUploadWidget({
+  cloudName: "dlnemlkgg",
+  uploadPreset: "CmsKys",
+  sources: ["local"], // ✅ ต้องมี comma ก่อนหน้า
+  multiple: false
+}, (error, result) => {
+
+  if (!error && result.event === "success") {
+
+    const imageUrl = result.info.secure_url;
+
+    addDoc(collection(db, "works"), {
+      customer: nameInput.value,
+      type: typeInput.value,
+      category: catInput,
+      image: imageUrl,
+      likes: 0
+    }).then(() => {
+      alert("อัปโหลดสำเร็จ 💖");
+      closePop();
+      load();
+    }).catch(err => {
+      console.error(err);
+      alert("บันทึกไม่สำเร็จ ❌");
+    });
+
+  }
+});
+
+widget.open();
+};
+window.closePop = () => {
+  document.getElementById("popup").style.display = "none";
+};
+window.openCatPop = (id, oldCat)=>{
+  currentEditId = id;
+
+  document.getElementById("catPopup").style.display = "flex";
+
+  document.getElementById("catSelect").value = oldCat || "หัว-อก";
+};
+window.closeCatPop = ()=>{
+  document.getElementById("catPopup").style.display = "none";
+};
+window.saveCategory = async()=>{
+  const newCat = document.getElementById("catSelect").value;
+
+  await updateDoc(doc(db,"works",currentEditId),{
+    category: newCat
+  });
+
+  closeCatPop();
+};
+window.editWork = async(id, oldName, oldType)=>{
+  const newName = prompt("แก้ชื่องาน", oldName);
+  if(newName === null) return;
+
+  const newType = prompt("แก้รายละเอียด", oldType);
+  if(newType === null) return;
+
+  await updateDoc(doc(db,"works",id),{
+    customer: newName,
+    type: newType
+  });
+};
+
+window.editCategory = async(id, oldCat)=>{
+  const newCat = prompt("แก้หมวด", oldCat);
+  if(newCat === null) return;
+
+  await updateDoc(doc(db,"works",id),{
+    category: newCat
+  });
+};
+window.deleteWork = async(id)=>{
+  if(confirm("ลบงานนี้ใช่ไหม?")){
+    await deleteDoc(doc(db,"works",id));
+    load();
+  }
+};
+window.like = async(id, currentLikes)=>{
+  const newLikes = (currentLikes || 0) + 1;
+  
+
+  // 🔥 อัปเดตหน้าจอก่อน (ลื่นขึ้น)
+  works = works.map(w=>{
+    if(w.id === id){
+      return {...w, likes:newLikes};
+    }
+    return w;
+  });
+
+
+  render();
+
+  // 🔥 ค่อยอัปเดต DB
+  await updateDoc(doc(db,"works",id),{
+    likes:newLikes
+  });
+};
+window.viewImage=(src)=>{
+  const viewer=document.getElementById("viewer");
+  const img=document.getElementById("viewerImg");
+
+  img.src=src;
+  viewer.style.display="flex";
+};
+/* load */
+function load(){
+  const grid = document.getElementById("grid");
+
+  grid.innerHTML = `
+<div class="loader">
+  💖 กำลังโหลดผลงาน... 💖
+</div>`;
+
+  onSnapshot(collection(db,"works"), (snap)=>{
+    works = [];
+
+    snap.forEach(d=>{
+      works.push({id:d.id, ...d.data()});
+    });
+
+    render(); // ✅ แค่นี้พอ
+  });
+}
+
+/* render */
+/* render */
+function render(){
+  const grid = document.getElementById("grid");
+
+  let html = "";
+
+  works
+  .filter(w=> currentFilter==="ทั้งหมด" || w.category===currentFilter)
+  .forEach(w=>{
+    html += `
+<div class="card">
+  <img src="${(w.image || '').replace('/upload/', '/upload/w_250,q_auto,f_auto/')}"
+       loading="lazy"
+       onclick="viewImage(this.src)">
+        <div class="watermark">DarealKYS</div>
+
+  <div class="like-btn" onclick="event.stopPropagation(); like('${w.id}', ${w.likes || 0})">
+    ❤️ ${w.likes || 0}
+  </div>
+
+  ${isAdmin ? `
+  <div class="delete-btn" onclick="event.stopPropagation(); deleteWork('${w.id}')">
+    🗑
+  </div>
+
+  <div class="edit-btn"
+    data-id="${w.id}"
+    data-name="${(w.customer || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;')}"
+    data-type="${(w.type || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;')}"
+    onclick="event.stopPropagation(); editWork(this.dataset.id, this.dataset.name, this.dataset.type)">
+    ✏️
+  </div>
+
+  <div class="cat-btn"
+    onclick="event.stopPropagation(); openCatPop('${w.id}', '${w.category || ''}')">
+    📁
+  </div>
+` : ""}
+
+  <div class="overlay">
+    ${w.customer || ""}
+    <br><small>${w.type || ""}</small>
+  </div>
+</div>`;
+  });
+
+  if(html === ""){
+    grid.innerHTML = `
+    <div class="empty">
+      <div class="emoji">🎨</div>
+      <div class="text">ยังไม่มีผลงาน</div>
+      <div class="sub">มาเป็นคนแรกที่สั่งคอมมิชชั่นกันเถอะ 💖</div>
+    </div>`;
+  }else{
+    grid.innerHTML = html;
+  }
+}
+
+load();
+
+document.getElementById("file").addEventListener("change", e=>{
+  const file=e.target.files[0];
+  if(!file) return;
+
+  const reader=new FileReader();
+  reader.onload=(ev)=>{
+    const img=document.getElementById("preview");
+    img.src=ev.target.result;
+    img.style.display="block";
+  };
+  reader.readAsDataURL(file);
+});
+</script>
+
+</body>
+</html>
